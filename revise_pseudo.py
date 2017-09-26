@@ -17,10 +17,19 @@ import random
 secret_number = random.randint(1,100)
 tries = 0
 guess = -1
-while guess != secret_number and tries <= 10:
-    guess =  int(raw_input('Guess the number!\n>'))
-    if guess == secret_number:
-        print('You did it!')
+print("Guess the number! It's an integer between 1 and 100, inclusive:")
+for _ in range(10):
+    guess =  input(">")
+
+    while not guess.isdigit() or int(guess) > 100 or int(guess) < 1:
+        print("Oops! Your guess must be an integer between 1 and 100 incluse:")
+        guess = input(">")
+
+    if int(guess) == secret_number:
+        print("{} is correct! You did it!".format(secret_number))
         break
-    print(Sorry)
+    if tries == 9:
+        print("The number was {}. Better luck next time!".format(secret_number))
+        break
+    print("Sorry! Try again!")
     tries += 1
