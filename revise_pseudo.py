@@ -14,22 +14,27 @@ secret_number = generate a random number between 0 and 100
  '''
 import random
 
-secret_number = random.randint(1,100)
+secret_number = random.randint(0, 100)
 tries = 0
 guess = -1
-print("Guess the number! It's an integer between 1 and 100, inclusive:")
-for _ in range(10):
+print("Guess the number! It's an integer between 0 and 100, inclusive:")
+while secret_number != guess:
     guess =  input(">")
 
-    while not guess.isdigit() or int(guess) > 100 or int(guess) < 1:
-        print("Oops! Your guess must be an integer between 1 and 100 incluse:")
+    while not guess.isdigit() or int(guess) > 100 or int(guess) < 0:
+        print("Oops! Your guess must be an integer between 0 and 100 inclusive:")
         guess = input(">")
 
-    if int(guess) == secret_number:
-        print("{} is correct! You did it!".format(secret_number))
+    guess = int(guess)
+    if guess < secret_number:
+        print("Sorry, that guess was too low, try again.")
+    elif guess > secret_number:
+        print("Sorry, that guess was too high, try again.")
+    else:
+        print("{} is correct! You win!".format(secret_number))
         break
+
     if tries == 9:
-        print("The number was {}. Better luck next time!".format(secret_number))
+        print("The number was {}. You lose. Better luck next time!".format(secret_number))
         break
-    print("Sorry! Try again!")
     tries += 1
